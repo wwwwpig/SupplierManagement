@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>WebFirst.Entities</RootNamespace>
+    <AssemblyName>WebFirst.Entities</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+         <PackageReference Include="SqlSugarCore" Version="5.1.4.211" />
+  </ItemGroup>
+  
+</Project>

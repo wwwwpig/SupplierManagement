@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>images\Supplier.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\logo.png" />
+    <None Remove="Supplier.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\Supplier.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="3.2.0" />
+    <PackageReference Include="NPOI" Version="2.7.5" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.211" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entites\WebFirst.Entities.csproj" />
+    <ProjectReference Include="..\Services\WebFirst.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\logo.png" />
+    <Resource Include="Supplier.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Template\Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

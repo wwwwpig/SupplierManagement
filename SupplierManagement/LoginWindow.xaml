@@ -1,0 +1,108 @@
+﻿<Window x:Class="SupplierManagement.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupplierManagement"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow" ResizeMode="NoResize"
+        Title="登录" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=txtUserID}">
+    <Window.Resources>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部样式与 MainWindow 保持一致 -->
+        <Border Grid.Row="0" Background="#2D2D30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="/images/logo.png"
+                       Width="48"
+                       Height="48"
+                       Margin="16,0,0,0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Stretch="Uniform"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="供应商管理系统"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="16,0,0,0"/>
+            </Grid>
+        </Border>
+
+        <!-- 中间登录卡片 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="420"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1" Style="{StaticResource CardBorderStyle}" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="用户登录" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
+
+                    <StackPanel Orientation="Vertical" Margin="0,4,0,0">
+                        <TextBlock Text="用户名" Foreground="#CCC"/>
+                        <TextBox x:Name="txtUserID" Height="28" Margin="0,4,0,8" VerticalContentAlignment="Center"/>
+
+                        <TextBlock Text="密码" Foreground="#CCC"/>
+                        <PasswordBox x:Name="pwdPassword" Height="28" Margin="0,4,0,8" VerticalContentAlignment="Center"/>
+
+                        <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4,0,12">
+                            <CheckBox x:Name="chkRemember" Foreground="#CCC" VerticalAlignment="Center" />
+                            <TextBlock Text="记住我" Foreground="#CCC" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        </StackPanel>-->
+
+                        <Button x:Name="btnLogin" Content="登录" Style="{StaticResource PrimaryButton}" Height="34" Margin="0,15" Click="btnLogin_Click" IsDefault="True"/>
+
+                        <TextBlock x:Name="lblMessage" Foreground="#FFCCCC" Margin="0,10,0,0" Visibility="Collapsed" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- 底部状态栏，风格与 MainWindow 一致 -->
+        <Border Grid.Row="2" Background="#007ACC" BorderBrush="#3E3E42" BorderThickness="0,1,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="statusText" Grid.Column="0" Text="就绪" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+
+                <TextBlock Grid.Column="1" Text="v1.2" Foreground="White" VerticalAlignment="Center" Margin="10,0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

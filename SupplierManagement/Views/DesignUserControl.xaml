@@ -1,0 +1,218 @@
+﻿<UserControl x:Class="SupplierManagement.Views.DesignUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SupplierManagement.Views"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" 
+             Background="#1E1E1E">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resource/Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        <!--<Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <Style x:Key="TextBlockQueryStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#CCC"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="10,0,5,0"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>-->
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 页面标题 -->
+        <TextBlock Grid.Row="0"
+                   Text="设计管理"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="30,20,30,10"/>
+
+        <!-- 页面内容 -->
+        <Grid Grid.Row="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 查询 -->
+            <Border Grid.Row="0" Style="{StaticResource CardBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                   Text="查询"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="0,0,0,15"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBlock Text="项目编号" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <TextBox x:Name="txtProjectIdQuery" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="项目名称" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <TextBox x:Name="txtProjectNameQuery" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="设备名称" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <TextBox x:Name="txtDeviceNameQuery" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="物料编号" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <TextBox x:Name="txtMaterialIDQuery" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="物料名称" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <TextBox x:Name="txtMaterialNameQuery" Style="{StaticResource TextBoxStyle}"/>
+                        <TextBlock Text="供应商" Style="{StaticResource TextBlockQueryStyle}"/>
+                        <ComboBox x:Name="cmbSupplierQuery" Width="220" Style="{StaticResource ComboBoxStyle}"/>
+                        <Button x:Name="btnQuery" Style="{StaticResource ButtonStyle}" Content="查询" HorizontalAlignment="Right" Click="btnQuery_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- 查询结果 -->
+            <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}">
+                <DataGrid x:Name="dg" SelectionChanged="dg_SelectionChanged" AutoGenerateColumns="False" CanUserAddRows="False"
+                          HorizontalScrollBarVisibility="Visible" CanUserResizeColumns="True" LoadingRow="dg_LoadingRow" >
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="已作废">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <!--<DataGridCheckBoxColumn x:Name="chkSelected" Width="30">
+                            <DataGridCheckBoxColumn.Header>
+                                <CheckBox x:Name="chkAll"/>
+                            </DataGridCheckBoxColumn.Header>
+                        </DataGridCheckBoxColumn>-->
+                        <!-- 序号列 -->
+                        <DataGridTextColumn Header="序号" Width="50" IsReadOnly="True"
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=Header}"/>
+
+
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="项目编号" Binding="{Binding ProjectID}"/>
+                        <DataGridTextColumn Header="项目名称" Binding="{Binding ProjectName}"/>
+                        <DataGridTextColumn Header="设备名称" Binding="{Binding DeviceName}"/>
+                        <DataGridTextColumn Header="物料编号" Binding="{Binding MaterialID}"/>
+                        <DataGridTextColumn Header="BOM层级" Binding="{Binding BOMLevel}"/>
+                        <DataGridTextColumn Header="物料名称" Binding="{Binding MaterialName}"/>
+                        <DataGridTextColumn Header="使用数量" Binding="{Binding Qty}"/>
+                        <DataGridTextColumn Header="物料单位" Binding="{Binding Unit}"/>
+                        <DataGridTextColumn Header="物料规格" Binding="{Binding Spec}"/>
+                        <DataGridTextColumn Header="物料角色" Binding="{Binding MaterialRole}"/>
+                        <DataGridTextColumn Header="设计状态" Binding="{Binding DesignStatus}"/>
+                        <DataGridTextColumn Header="物料工艺" Binding="{Binding WorkmanShip}"/>
+                        <DataGridTextColumn Header="备注" Binding="{Binding Remark}"/>
+                        <DataGridTextColumn Header="状态" Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="设计人" Binding="{Binding Desinger}"/>
+                        <DataGridTextColumn Header="设计完成时间" Binding="{Binding DesignCompletionTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="采购人" Binding="{Binding Buyer}"/>
+                        <DataGridTextColumn Header="采购发出时间" Binding="{Binding BuyTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="计划到货日期" Binding="{Binding PlannedDeliveryDate,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="供应商名称" Binding="{Binding SupplierName}"/>
+                        <DataGridTextColumn Header="采购备注" Binding="{Binding BuyerRemark}"/>
+                        <DataGridTextColumn Header="质检人" Binding="{Binding QualityInspector}"/>
+                        <DataGridTextColumn Header="质检时间" Binding="{Binding QualityInspectionTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="是否合格" Binding="{Binding IsPass}"/>
+                        <DataGridTextColumn Header="不合格原因" Binding="{Binding ReasonForNotPass}"/>
+                        <DataGridTextColumn Header="处理方式" Binding="{Binding ProcessMode}"/>
+                        <DataGridTextColumn Header="返厂时间" Binding="{Binding ReturnSupplierTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="质检备注" Binding="{Binding QualityInspectorRemark}"/>
+                        <DataGridTextColumn Header="入库人" Binding="{Binding PersonIn}"/>
+                        <DataGridTextColumn Header="入库时间" Binding="{Binding InWarehouseTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="入库备注" Binding="{Binding PersonInRemark}"/>
+                        <DataGridTextColumn Header="出库人" Binding="{Binding PersonOut}"/>
+                        <DataGridTextColumn Header="出库时间" Binding="{Binding OutWarehouseTime,StringFormat='yyyy-MM-dd'}"/>
+                        <DataGridTextColumn Header="出库备注" Binding="{Binding PersonOutRemark}"/>
+                        <DataGridTextColumn Header="图号变更历史" Binding="{Binding ChangeHistory}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- 基础信息维护 -->
+            <Border Grid.Row="2" Style="{StaticResource CardBorderStyle}" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="操作"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0,0,0,15"/>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                    
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="变更前物料编码" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockQueryStyle}"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                                    <TextBox x:Name="txtMaterialIDBefore" Width="180" Style="{StaticResource TextBoxStyle}" IsEnabled="False"/>
+                                </StackPanel>
+                                <TextBlock Text="变更后物料编码" Grid.Row="0" Grid.Column="2" Style="{StaticResource TextBlockQueryStyle}"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" >
+                                    <TextBox x:Name="txtMaterialIDAfter" Width="180" Style="{StaticResource TextBoxStyle}"/>
+                                    <TextBlock Text="*" Foreground="Red" Style="{StaticResource TextBlockQueryStyle}"/>
+                                </StackPanel>
+                               
+                            </Grid>
+                            <StackPanel Grid.Column="1">
+                                <Button x:Name="btnExcel" Content="Excel导入" Style="{StaticResource ButtonStyle}" Margin="0,15,0,0" Click="btnExcel_Click"/>
+                                <Button x:Name="btnChangeMaterialID" Content="物料编号变更" Style="{StaticResource ButtonStyle}" Margin="0,10,0,0" Click="btnChangeMaterialID_Click"/>
+
+                            </StackPanel>
+                        </Grid>
+
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

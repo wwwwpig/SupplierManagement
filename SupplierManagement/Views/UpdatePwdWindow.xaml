@@ -1,0 +1,42 @@
+﻿<Window x:Class="SupplierManagement.Views.UpdatePwdWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupplierManagement.Views"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow" ResizeMode="NoResize"
+        Background="#2D2D30"
+        Foreground="White"
+        WindowStartupLocation="CenterScreen"
+        Title="修改密码" Height="300" Width="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resource/Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="当前密码：" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Foreground="White"/>
+        <PasswordBox x:Name="pbCurrentPwd" Grid.Row="0" Grid.Column="1"  Height="30" VerticalAlignment="Center" Margin="5,0,10,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="新密码：" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Foreground="White"/>
+        <PasswordBox x:Name="pbNewPwd" Grid.Row="1" Grid.Column="1"  Height="30" VerticalAlignment="Center" Margin="5,0,10,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="再输入一次新密码：" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Foreground="White"/>
+        <PasswordBox x:Name="pbNewPwdAgain" Grid.Row="2" Grid.Column="1"  Height="30" VerticalAlignment="Center" Margin="5,0,10,0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="btnSave" Content="保存"  Width="80" Height="35" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="取消"  Width="80" Height="35" Margin="20,0,0,0" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
